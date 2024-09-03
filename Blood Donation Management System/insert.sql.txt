@@ -1,0 +1,37 @@
+INSERT INTO Location (pincode, loc_name, street, city, house_no) VALUES
+ ('12345', 'Central Square', '123 Main Street', 'Metropolis', '123'),
+ ('56321', 'Downtown Plaza', '456 Elm Street', 'Cityville', '456'),
+ ('12335', 'West End', '789 Oak Street', 'Metropolis', '789'),
+ ('52321', 'East Side', '321 Pine Street', 'Cityville', '321'),
+ ('12445', 'North Ridge', '654 Maple Street', 'Metropolis', '654'),
+ ('53321', 'South Terrace', '987 Birch Street', 'Cityville', '987');
+ INSERT INTO Bloodbank_Man (Man_phno, Man_name, pincode) VALUES
+ ('7777777777', 'David White', '12345'),
+ ('6666666666', 'Sarah Green', '56321'),
+ ('5555555555', 'Daniel Thomas', '12335'),
+ ('4444444444', 'Emma Baker', '52321'),
+ ('3333333333', 'James Lee', '12445'),
+ ('2222222222', 'Olivia Smith', '53321');
+ INSERT INTO Hospital (H_phno, H_name, man_id, pincode) VALUES
+ ('1111111111', 'City General Hospital', 7, '12345'),
+ ('2222222222', 'Community Medical Center', 8, '56321'),
+ ('3333333333', 'Metropolitan Health Clinic', 7, '12335'),
+ ('4444444444', 'Unity Emergency Hospital', 8, '52321'),
+ ('5555555555', 'Global Health Center', 7, '12445'),
+ ('6666666666', 'National Hospital', 8, '53321');
+ INSERT INTO Receiver (R_sex, R_phno, R_bloodgrp, R_name, R_age, Man_id)
+ VALUES
+('M', '1234567890', 'A+', 'Alex Johnson', 30, 7),
+ ('F', '9876543210', 'B-', 'Sophia Brown', 25, 8),
+ ('M', '1112223333', 'AB+', 'Ryan Davis', 40, 9),
+ ('F', '4445556666', 'O-', 'Emma Garcia', 22, 10),
+ ('M', '7778889999', 'A-', 'Daniel Wilson', 45, 11),
+ ('F', '3332221111', 'B+', 'Olivia Taylor', 28, 12);
+ INSERT INTO Donor (D_phno, D_bloodgrp, D_name, D_sex, D_age, pincode, hospital_id)
+ VALUES
+ ('9999999999', 'O+', 'Michael Rodriguez', 'M', 35, '12345', 13),
+ ('8888888888', 'AB-', 'Emily Martinez', 'F', 28, '56321', 14),
+ ('7777777777', 'B+', 'William Thompson', 'M', 30, '12335', 13),
+ ('6666666666', 'A-', 'Sophia Clark', 'F', 32, '52321', 14),
+ ('5555555555', 'B-', 'Matthew Hernandez', 'M', 27, '12445', 13),
+ ('4444444444', 'AB+', 'Olivia Davis', 'F', 26, '53321', 14);

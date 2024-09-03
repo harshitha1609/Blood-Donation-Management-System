@@ -1,0 +1,44 @@
+ CREATE TABLE Location (
+ pincode VARCHAR(10) PRIMARY KEY,
+ loc_name VARCHAR(255),
+ street VARCHAR(255),
+ city VARCHAR(255),
+ house_no VARCHAR(10)
+ );
+ CREATE TABLE Donor (
+ D_id INT AUTO_INCREMENT PRIMARY KEY,
+ D_phno VARCHAR(15),
+ D_bloodgrp VARCHAR(5),
+ D_name VARCHAR(255),
+ D_sex CHAR(1),
+ D_age INT,
+ pincode VARCHAR(10),
+ hospital_id INT,
+ CONSTRAINT fk_donor_hospital FOREIGN KEY (hospital_id) REFERENCES Hospital(H_id)
+ );
+ CREATE TABLE Bloodbank_Man (
+ Man_id INT AUTO_INCREMENT PRIMARY KEY,
+ Man_phno VARCHAR(15),
+ Man_name VARCHAR(255),
+ pincode VARCHAR(10),
+ CONSTRAINT fk_bloodbank_man_location_pincode FOREIGN KEY (pincode) REFERENCES Location(pincode)
+ );
+CREATE TABLE Receiver (
+ R_id INT AUTO_INCREMENT PRIMARY KEY,
+ R_sex CHAR(1),
+ R_phno VARCHAR(15),
+ R_bloodgrp VARCHAR(5),
+ R_name VARCHAR(255),
+ R_age INT,
+ D_id INT,
+ CONSTRAINT fk_receiver_donor_id FOREIGN KEY (D_id) REFERENCES Donor(D_id)
+ );
+ CREATE TABLE Hospital (
+ H_id INT AUTO_INCREMENT PRIMARY KEY,
+ H_phno VARCHAR(15),
+ H_name VARCHAR(255),
+ man_id INT,
+ pincode VARCHAR(10),
+ CONSTRAINT fk_hospital_man_id FOREIGN KEY (man_id) REFERENCES Bloodbank_Man(Man_id),
+ CONSTRAINT fk_hospital_location_pincode FOREIGN KEY (pincode) REFERENCES Location(pincode)
+ );

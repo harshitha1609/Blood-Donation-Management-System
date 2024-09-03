@@ -1,0 +1,24 @@
+-- Calculate the average age of donors.
+ SELECT AVG(D_age) AS average_age FROM Donor;-- Find the hospital with the highest number of donors.
+ SELECT * FROMHospital WHERE pincode = (SELECT pincode FROM Donor GROUP BY
+ pincode ORDER BY COUNT(*) DESC LIMIT 1);-- List the names of donors along with the name and phone number of the blood bank
+ manager of the hospital they are associated with.
+ SELECT d.D_name AS donor_name, bb.Man_name AS blood_bank_manager,
+ bb.Man_phno AS blood_bank_manager_phno
+FROMDonor d
+ INNER JOIN Hospital h ON d.pincode = h.pincode
+ INNER JOIN Bloodbank_Man bb ON h.man_id = bb.Man_id;-- Count the number of donors for each blood group
+ SELECT D_bloodgrp, COUNT(*) AS donor_count
+ FROMDonor GROUPBYD_bloodgrp;-- Find all receivers who are associated with hospitals managed by 'David White'.
+ SELECT * FROMReceiver WHERE man_id = (SELECT Man_id FROM Bloodbank_Man
+ WHEREMan_name ='David White');-- Retrieve the details of donors who are from hospitals located in 'East Side' and have
+ a blood group of 'A+'.
+ SELECT * FROMDonor d INNER JOIN Hospital h ON
+ d.pincode = (select pincode from location where loc_name ='East Side') AND d.D_bloodgrp
+ = 'A+';-- Find all hospitals that do not have any donors associated with them.
+ SELECT * FROMHospital WHERE pincode NOT IN (SELECT DISTINCT pincode FROM
+ Donor);-- Retrieve the name and phone number of the hospital along with the total count of
+ donors associated with each hospital.
+ SELECT h.H_name AS hospital_name, h.H_phno AS hospital_phno, COUNT(d.D_id) AS
+ total_donors
+ FROMHospital h LEFT JOIN Donor d ON h.pincode = d.pincode GROUP BY h.H_id; 

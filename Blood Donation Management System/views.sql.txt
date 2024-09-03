@@ -1,0 +1,25 @@
+-- View for Blood Group Distribution among Donors:
+ CREATE VIEW Blood_Group_Distribution AS SELECT D_bloodgrp, COUNT(*) AS count
+ FROMDonor
+ GROUPBYD_bloodgrp;-- View for Hospitals with Their Location Information
+ CREATE VIEW Hospitals_With_Location AS SELECT h.*, l.pincode AS location_pincode,
+ l.loc_name, l.city
+ FROMHospital h INNER JOIN Location l ON h.pincode = l.pincode;-- view for Blood bank managers with their hospital count
+ CREATE VIEW Bloodbank_Managers_With_Hospital_Count AS SELECT bb.*,
+ COUNT(h.H_id) AS hospital_count
+ FROMBloodbank_Man bb LEFT JOIN Hospital h ON bb.pincode = h.pincode GROUP BY
+ bb.Man_id;
+ select * from Bloodbank_Managers_With_Hospital_Count;-- CREATE VIEW Receivers_With_Donor_Count_By_Bloodgroup AS SELECT r.*,
+ d.D_bloodgrp, COUNT(*) AS donor_count
+ FROMReceiver r LEFT JOIN Donor d ON r.R_bloodgrp = d.D_bloodgrp GROUP BY r.R_id,
+ d.D_bloodgrp;
+ select * from Receivers_With_Donor_Count_By_Bloodgroup;-- CREATE VIEW Donors_With_Bloodgroup_And_Agegroup AS
+ SELECT D_id, D_name, D_bloodgrp,
+ CASE
+ WHEND_ageBETWEEN18AND30THEN'18-30'
+ WHEND_ageBETWEEN31AND45THEN'31-45'
+WHEND_ageBETWEEN46AND60THEN'46-60'
+ ELSE 'Above 60'
+ ENDASage_group
+ FROMDonor;
+ select * from Donors_With_Bloodgroup_And_Agegroup
